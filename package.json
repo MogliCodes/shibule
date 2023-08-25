@@ -1,0 +1,22 @@
+{
+  "name": "nuxt-app",
+  "private": true,
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare",
+    "ctfl:mgr:run": "./ctfl-migration.sh"
+  },
+  "devDependencies": {
+    "@nuxtjs/tailwindcss": "^6.8.0",
+    "@types/node": "^18.16.18",
+    "nuxt": "^3.5.3"
+  },
+  "dependencies": {
+    "contentful-cli": "^2.6.22",
+    "contentful-rich-text-vue-renderer": "^3.1.0",
+    "nuxt-graphql-client": "^0.2.27"
+  }
+}

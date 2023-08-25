@@ -1,0 +1,14 @@
+query queryMusicReviews {
+    contentMusicReviewCollection {
+        items {
+            sys {
+                id
+            }
+            artistCollection {
+                items {
+                    name
+                }
+            }
+        }
+    }
+}

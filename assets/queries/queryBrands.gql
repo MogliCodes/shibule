@@ -1,0 +1,16 @@
+query queryBrands {
+    contentBrandCollection {
+        items {
+            sys {
+                id
+            }
+            title
+           logo {
+               url
+           }
+            description {
+                json
+            }
+        }
+    }
+}
