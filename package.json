@@ -7,12 +7,21 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "ctfl:mgr:run": "./ctfl-migration.sh"
+    "lint": "eslint --ext .js,.ts,.vue --ignore-path .gitignore .",
+    "lint:fix": "eslint --ext .js,.ts,.vue --ignore-path .gitignore . --fix"
   },
   "devDependencies": {
+    "@nuxtjs/eslint-config-typescript": "^12.1.0",
     "@nuxtjs/tailwindcss": "^6.8.0",
     "@types/node": "^18.16.18",
-    "nuxt": "^3.6.5"
+    "@typescript-eslint/parser": "^6.5.0",
+    "eslint": "^8.48.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-prettier": "^5.0.0",
+    "eslint-plugin-tailwindcss": "^3.13.0",
+    "nuxt": "^3.6.5",
+    "prettier": "^3.0.3",
+    "typescript": "^5.2.2"
   },
   "dependencies": {
     "contentful-cli": "^2.6.46",
