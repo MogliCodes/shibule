@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="lottie-container" id="lottie-container"></div>
+    <div id="lottie-container" class="lottie-container"></div>
   </div>
 </template>
 
@@ -11,11 +11,11 @@ onMounted(() => {
     animType: 'svg',
     loop: false,
     autoplay: false,
-    path: 'shibule-logo.json'
-  });
+    path: 'shibule-logo.json',
+  })
   setTimeout(() => {
-    item.goToAndPlay(0,true);
-  },100)
+    item.goToAndPlay(0, true)
+  }, 100)
 })
 </script>
 

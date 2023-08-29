@@ -8,11 +8,13 @@
 <script setup>
 const slugFormatted = 'startseite'
 const { data: pageData } = await useAsyncGql({
-  operation: "pageBySlug",
+  operation: 'pageBySlug',
   variables: { slug: slugFormatted, preview: true },
-});
+})
 
 const { data: reviews } = await useAsyncGql({
-  operation: "queryMusicReviews",
-});
+  operation: 'queryMusicReviews',
+})
+
+console.log(pageData, reviews)
 </script>
