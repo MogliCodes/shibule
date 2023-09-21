@@ -1,0 +1,24 @@
+query queryNavigationById($id: String!) {
+    uiNavigation(id: $id) {
+        internalName
+        navigationItemsCollection {
+            items {
+                __typename
+                ... on ContentBrand {
+                    sys {
+                        id
+                    }
+                    slug
+                    title
+                }
+                ... on PageGeneric {
+                    sys {
+                        id
+                    }
+                    slug
+                    internalName
+                }
+            }
+        }
+    }
+}

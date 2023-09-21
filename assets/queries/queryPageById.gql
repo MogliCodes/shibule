@@ -1,0 +1,19 @@
+query queryPageById($id: String!) {
+    pageGeneric(id: $id) {
+        sys {
+            id
+        }
+        sectionsCollection {
+            items {
+                sys {
+                    id
+                }
+                ... on LayoutGrid {
+                    sys {
+                        id
+                    }
+                }
+            }
+        }
+    }
+}

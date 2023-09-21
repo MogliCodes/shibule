@@ -1,0 +1,11 @@
+query queryPages {
+    pageGenericCollection {
+        items {
+            sys {
+                id
+            }
+            slug
+            internalName
+        }
+    }
+}
