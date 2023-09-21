@@ -1,7 +1,9 @@
 <template>
   <BaseContainer>
-    <h1 class="text-3xl font-bold">{{ brand.contentBrand.title }}</h1>
-    {{ brand }}
+    <h1 class="text-8xl font-bebas">{{ brand.contentBrand.title }}</h1>
+    <pre>
+      {{ brand }}
+    </pre>
   </BaseContainer>
 </template>
 

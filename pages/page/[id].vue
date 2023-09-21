@@ -1,5 +1,6 @@
 <template>
   <BaseContainer>
+    <h1 class="text-8xl font-bebas">{{ page.pageGeneric.title }}</h1>
     {{ pageId }}
     <pre>
       {{ page }}

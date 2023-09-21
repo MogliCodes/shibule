@@ -4,14 +4,14 @@
       <img class="w-20" src="/shibule_logo_white.svg" alt="">
     </NuxtLink>
     <div
-        class="absolute right-10 top-10 flex h-20 w-20 items-center justify-center rounded-full bg-gray-100"
+        class="absolute right-10 top-10 flex h-20 w-20 items-center justify-center rounded-full bg-gray-50"
     >
       <div
           v-show="isNavActive"
-          class="absolute right-0 top-0 z-10 h-20 w-20 rounded-full bg-gray-100 transition-transform duration-500"
+          class="absolute right-0 top-0 z-10 h-20 w-20 rounded-full bg-gray-50 transition-transform duration-500"
       >
         <nav
-            class="fixed inset-0 flex flex-col items-center justify-center bg-gray-300"
+            class="fixed inset-0 flex flex-col items-center justify-center bg-gray-50"
         >
           <div v-for="(item, index) in navigationItems" v-show="isNavActive" :key="`nav-item-${index}`">
             <NuxtLink @click="toggleNavigation" class="block py-4" :to="getPagePath(item)">

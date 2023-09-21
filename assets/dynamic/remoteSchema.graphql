@@ -253,6 +253,7 @@ type PageGeneric implements Entry {
     sectionsCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): PageGenericSectionsCollection
     slug(locale: String): String
     sys: Sys!
+    title(locale: String): String
 }
 
 type PageGenericCollection {
@@ -681,6 +682,8 @@ enum PageGenericOrder {
     sys_publishedAt_DESC
     sys_publishedVersion_ASC
     sys_publishedVersion_DESC
+    title_ASC
+    title_DESC
 }
 
 enum UiNavigationOrder {
@@ -1000,6 +1003,13 @@ input PageGenericFilter {
     slug_not_contains: String
     slug_not_in: [String]
     sys: SysFilter
+    title: String
+    title_contains: String
+    title_exists: Boolean
+    title_in: [String]
+    title_not: String
+    title_not_contains: String
+    title_not_in: [String]
 }
 
 input SysFilter {
@@ -1074,6 +1084,13 @@ input UiNavigationNavigationItemsFilter {
     slug_not_contains: String
     slug_not_in: [String]
     sys: SysFilter
+    title: String
+    title_contains: String
+    title_exists: Boolean
+    title_in: [String]
+    title_not: String
+    title_not_contains: String
+    title_not_in: [String]
 }
 
 input cfMetaMusicArtistNestedFilter {
@@ -1138,4 +1155,11 @@ input cfnavigationItemsMultiTypeNestedFilter {
     slug_not_contains: String
     slug_not_in: [String]
     sys: SysFilter
+    title: String
+    title_contains: String
+    title_exists: Boolean
+    title_in: [String]
+    title_not: String
+    title_not_contains: String
+    title_not_in: [String]
 }

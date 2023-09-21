@@ -12,6 +12,10 @@ query queryBrands {
             description {
                 json
             }
+            logo {
+                url
+                title
+            }
         }
     }
 }

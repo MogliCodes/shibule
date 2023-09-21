@@ -3,6 +3,7 @@ query queryPageById($id: String!) {
         sys {
             id
         }
+        title
         sectionsCollection {
             items {
                 sys {
