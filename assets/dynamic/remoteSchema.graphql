@@ -36,6 +36,7 @@ type AssetCollection {
 type AssetLinkingCollections {
     contentBrandCollection(limit: Int = 100, locale: String, order: [AssetLinkingCollectionsContentBrandCollectionOrder], preview: Boolean, skip: Int = 0): ContentBrandCollection
     entryCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): EntryCollection
+    mediaFileCollection(limit: Int = 100, locale: String, order: [AssetLinkingCollectionsMediaFileCollectionOrder], preview: Boolean, skip: Int = 0): MediaFileCollection
 }
 
 "[See type definition](https://app.contentful.com/spaces/52n4e3ya8eqj/content_types/contentBrand)"
@@ -177,10 +178,12 @@ type EntryCollection {
 
 "[See type definition](https://app.contentful.com/spaces/52n4e3ya8eqj/content_types/layoutGrid)"
 type LayoutGrid implements Entry {
+    contentCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): LayoutGridContentCollection
     contentfulMetadata: ContentfulMetadata!
     internalName(locale: String): String
     linkedFrom(allowedLocales: [String]): LayoutGridLinkingCollections
     sys: Sys!
+    title(locale: String): String
 }
 
 type LayoutGridCollection {
@@ -190,7 +193,35 @@ type LayoutGridCollection {
     total: Int!
 }
 
+type LayoutGridContentCollection {
+    items: [Entry]!
+    limit: Int!
+    skip: Int!
+    total: Int!
+}
+
 type LayoutGridLinkingCollections {
+    entryCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): EntryCollection
+}
+
+"[See type definition](https://app.contentful.com/spaces/52n4e3ya8eqj/content_types/mediaFile)"
+type MediaFile implements Entry {
+    contentfulMetadata: ContentfulMetadata!
+    file(locale: String, preview: Boolean): Asset
+    internalName(locale: String): String
+    linkedFrom(allowedLocales: [String]): MediaFileLinkingCollections
+    sys: Sys!
+    title(locale: String): String
+}
+
+type MediaFileCollection {
+    items: [MediaFile]!
+    limit: Int!
+    skip: Int!
+    total: Int!
+}
+
+type MediaFileLinkingCollections {
     entryCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): EntryCollection
 }
 
@@ -250,6 +281,7 @@ type PageGeneric implements Entry {
     contentfulMetadata: ContentfulMetadata!
     internalName(locale: String): String
     linkedFrom(allowedLocales: [String]): PageGenericLinkingCollections
+    parentPage(locale: String, preview: Boolean, where: PageGenericFilter): PageGeneric
     sectionsCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): PageGenericSectionsCollection
     slug(locale: String): String
     sys: Sys!
@@ -265,6 +297,7 @@ type PageGenericCollection {
 
 type PageGenericLinkingCollections {
     entryCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): EntryCollection
+    pageGenericCollection(limit: Int = 100, locale: String, order: [PageGenericLinkingCollectionsPageGenericCollectionOrder], preview: Boolean, skip: Int = 0): PageGenericCollection
     uiNavigationCollection(limit: Int = 100, locale: String, order: [PageGenericLinkingCollectionsUiNavigationCollectionOrder], preview: Boolean, skip: Int = 0): UiNavigationCollection
 }
 
@@ -285,6 +318,8 @@ type Query {
     entryCollection(limit: Int = 100, locale: String, order: [EntryOrder], preview: Boolean, skip: Int = 0, where: EntryFilter): EntryCollection
     layoutGrid(id: String!, locale: String, preview: Boolean): LayoutGrid
     layoutGridCollection(limit: Int = 100, locale: String, order: [LayoutGridOrder], preview: Boolean, skip: Int = 0, where: LayoutGridFilter): LayoutGridCollection
+    mediaFile(id: String!, locale: String, preview: Boolean): MediaFile
+    mediaFileCollection(limit: Int = 100, locale: String, order: [MediaFileOrder], preview: Boolean, skip: Int = 0, where: MediaFileFilter): MediaFileCollection
     metaMusicArtist(id: String!, locale: String, preview: Boolean): MetaMusicArtist
     metaMusicArtistCollection(limit: Int = 100, locale: String, order: [MetaMusicArtistOrder], preview: Boolean, skip: Int = 0, where: MetaMusicArtistFilter): MetaMusicArtistCollection
     metaMusicGenre(id: String!, locale: String, preview: Boolean): MetaMusicGenre
@@ -346,6 +381,21 @@ enum AssetLinkingCollectionsContentBrandCollectionOrder {
     internalName_DESC
     slug_ASC
     slug_DESC
+    sys_firstPublishedAt_ASC
+    sys_firstPublishedAt_DESC
+    sys_id_ASC
+    sys_id_DESC
+    sys_publishedAt_ASC
+    sys_publishedAt_DESC
+    sys_publishedVersion_ASC
+    sys_publishedVersion_DESC
+    title_ASC
+    title_DESC
+}
+
+enum AssetLinkingCollectionsMediaFileCollectionOrder {
+    internalName_ASC
+    internalName_DESC
     sys_firstPublishedAt_ASC
     sys_firstPublishedAt_DESC
     sys_id_ASC
@@ -552,6 +602,23 @@ enum LayoutGridOrder {
     sys_publishedAt_DESC
     sys_publishedVersion_ASC
     sys_publishedVersion_DESC
+    title_ASC
+    title_DESC
+}
+
+enum MediaFileOrder {
+    internalName_ASC
+    internalName_DESC
+    sys_firstPublishedAt_ASC
+    sys_firstPublishedAt_DESC
+    sys_id_ASC
+    sys_id_DESC
+    sys_publishedAt_ASC
+    sys_publishedAt_DESC
+    sys_publishedVersion_ASC
+    sys_publishedVersion_DESC
+    title_ASC
+    title_DESC
 }
 
 enum MetaMusicArtistAkaCollectionOrder {
@@ -654,6 +721,23 @@ enum MetaMusicGenreOrder {
     sys_publishedAt_DESC
     sys_publishedVersion_ASC
     sys_publishedVersion_DESC
+}
+
+enum PageGenericLinkingCollectionsPageGenericCollectionOrder {
+    internalName_ASC
+    internalName_DESC
+    slug_ASC
+    slug_DESC
+    sys_firstPublishedAt_ASC
+    sys_firstPublishedAt_DESC
+    sys_id_ASC
+    sys_id_DESC
+    sys_publishedAt_ASC
+    sys_publishedAt_DESC
+    sys_publishedVersion_ASC
+    sys_publishedVersion_DESC
+    title_ASC
+    title_DESC
 }
 
 enum PageGenericLinkingCollectionsUiNavigationCollectionOrder {
@@ -928,6 +1012,7 @@ input ImageTransformOptions {
 input LayoutGridFilter {
     AND: [LayoutGridFilter]
     OR: [LayoutGridFilter]
+    contentCollection_exists: Boolean
     contentfulMetadata: ContentfulMetadataFilter
     internalName: String
     internalName_contains: String
@@ -937,6 +1022,35 @@ input LayoutGridFilter {
     internalName_not_contains: String
     internalName_not_in: [String]
     sys: SysFilter
+    title: String
+    title_contains: String
+    title_exists: Boolean
+    title_in: [String]
+    title_not: String
+    title_not_contains: String
+    title_not_in: [String]
+}
+
+input MediaFileFilter {
+    AND: [MediaFileFilter]
+    OR: [MediaFileFilter]
+    contentfulMetadata: ContentfulMetadataFilter
+    file_exists: Boolean
+    internalName: String
+    internalName_contains: String
+    internalName_exists: Boolean
+    internalName_in: [String]
+    internalName_not: String
+    internalName_not_contains: String
+    internalName_not_in: [String]
+    sys: SysFilter
+    title: String
+    title_contains: String
+    title_exists: Boolean
+    title_in: [String]
+    title_not: String
+    title_not_contains: String
+    title_not_in: [String]
 }
 
 input MetaMusicArtistFilter {
@@ -994,6 +1108,8 @@ input PageGenericFilter {
     internalName_not: String
     internalName_not_contains: String
     internalName_not_in: [String]
+    parentPage: cfPageGenericNestedFilter
+    parentPage_exists: Boolean
     sectionsCollection_exists: Boolean
     slug: String
     slug_contains: String
@@ -1134,6 +1250,36 @@ input cfMetaMusicGenreNestedFilter {
     name_not_contains: String
     name_not_in: [String]
     sys: SysFilter
+}
+
+input cfPageGenericNestedFilter {
+    AND: [cfPageGenericNestedFilter]
+    OR: [cfPageGenericNestedFilter]
+    contentfulMetadata: ContentfulMetadataFilter
+    internalName: String
+    internalName_contains: String
+    internalName_exists: Boolean
+    internalName_in: [String]
+    internalName_not: String
+    internalName_not_contains: String
+    internalName_not_in: [String]
+    parentPage_exists: Boolean
+    sectionsCollection_exists: Boolean
+    slug: String
+    slug_contains: String
+    slug_exists: Boolean
+    slug_in: [String]
+    slug_not: String
+    slug_not_contains: String
+    slug_not_in: [String]
+    sys: SysFilter
+    title: String
+    title_contains: String
+    title_exists: Boolean
+    title_in: [String]
+    title_not: String
+    title_not_contains: String
+    title_not_in: [String]
 }
 
 input cfnavigationItemsMultiTypeNestedFilter {

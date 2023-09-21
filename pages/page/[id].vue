@@ -1,11 +1,22 @@
 <template>
-  <BaseContainer>
-    <h1 class="text-8xl font-bebas">{{ page.pageGeneric.title }}</h1>
-    {{ pageId }}
-    <pre>
+  <div>
+    <BaseContainer>
       {{ page }}
-    </pre>
-  </BaseContainer>
+      <h1 class="font-bebas text-8xl">{{ page?.pageGeneric.title }}</h1>
+
+      <BaseGrid
+        v-for="(grid, index) in page?.pageGeneric.sectionsCollection.items"
+        :key="index"
+        :grid="grid"
+      />
+    </BaseContainer>
+    <BaseContainer>
+      <pre>
+      {{ page }}
+    </pre
+      >
+    </BaseContainer>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -18,5 +29,4 @@ const { data: page } = await useAsyncGql({
     id: pageId,
   },
 })
-
 </script>

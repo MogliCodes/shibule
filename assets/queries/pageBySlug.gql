@@ -1,7 +1,0 @@
-query pageBySlug{
-    pageGenericCollection {
-        items {
-            internalName
-        }
-    }
-}

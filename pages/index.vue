@@ -1,8 +1,7 @@
 <template>
   <div class="flex flex-col gap-20">
-    <BrandsList/>
-    <ContentRecent/>
+    <BrandsList />
+    <ContentRecent />
   </div>
 </template>
-<script setup lang="ts">
-</script>
+<script setup lang="ts"></script>

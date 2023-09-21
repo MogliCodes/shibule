@@ -9,7 +9,7 @@
 </template>
 
 <script setup>
-import AppFooter from "~/components/app/AppFooter.vue";
+import AppFooter from '~/components/app/AppFooter.vue'
 
 const slugFormatted = 'startseite'
 const { data: pageData } = await useAsyncGql({
