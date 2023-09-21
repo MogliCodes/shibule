@@ -1,7 +1,9 @@
 <template>
   <div>
     <AppHeader />
-    <BrandsList />
+    <NuxtLayout>
+      <NuxtPage />
+    </NuxtLayout>
   </div>
 </template>
 

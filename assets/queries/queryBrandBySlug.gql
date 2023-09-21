@@ -1,0 +1,8 @@
+query queryBrandBySlug($id: String!) {
+    contentBrand(id: $id) {
+        title
+        description {
+            json
+        }
+    }
+}

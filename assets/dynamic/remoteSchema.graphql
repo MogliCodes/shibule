@@ -43,6 +43,7 @@ type ContentBrand implements Entry {
     internalName(locale: String): String
     linkedFrom(allowedLocales: [String]): ContentBrandLinkingCollections
     logo(locale: String, preview: Boolean): Asset
+    slug(locale: String): String
     sys: Sys!
     title(locale: String): String
 }
@@ -309,6 +310,8 @@ type Sys {
 enum AssetLinkingCollectionsContentBrandCollectionOrder {
     internalName_ASC
     internalName_DESC
+    slug_ASC
+    slug_DESC
     sys_firstPublishedAt_ASC
     sys_firstPublishedAt_DESC
     sys_id_ASC
@@ -347,6 +350,8 @@ enum AssetOrder {
 enum ContentBrandOrder {
     internalName_ASC
     internalName_DESC
+    slug_ASC
+    slug_DESC
     sys_firstPublishedAt_ASC
     sys_firstPublishedAt_DESC
     sys_id_ASC
@@ -724,6 +729,13 @@ input ContentBrandFilter {
     internalName_not_contains: String
     internalName_not_in: [String]
     logo_exists: Boolean
+    slug: String
+    slug_contains: String
+    slug_exists: Boolean
+    slug_in: [String]
+    slug_not: String
+    slug_not_contains: String
+    slug_not_in: [String]
     sys: SysFilter
     title: String
     title_contains: String

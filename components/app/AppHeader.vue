@@ -1,7 +1,9 @@
 <template>
-  <div>
-    <div id="lottie-container" class="lottie-container"></div>
-  </div>
+  <header>
+    <NuxtLink :to="`/`">
+      <div id="lottie-container" class="lottie-container"></div>
+    </NuxtLink>
+  </header>
 </template>
 
 <script setup>

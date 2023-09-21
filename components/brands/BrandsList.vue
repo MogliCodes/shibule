@@ -3,15 +3,16 @@
     <h2 class="text-4xl font-bold">The Brands</h2>
   </div>
   <div class="container mx-auto grid grid-cols-4 gap-8">
-    <div
+    <NuxtLink
       v-for="(brand, index) in brands.contentBrandCollection.items"
       :key="index"
+      :to="`/brand/${brand.sys.id}`"
       class="rounded border p-4"
     >
       <h3 class="text-xl font-bold">{{ brand.title }}</h3>
       <img :src="brand?.logo" alt="" />
       <RichTextRenderer :document="brand?.description?.json" />
-    </div>
+    </NuxtLink>
   </div>
 </template>
 
