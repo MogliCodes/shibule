@@ -9,29 +9,6 @@ query queryPageById($id: String!) {
                 sys {
                     id
                 }
-                ... on LayoutGrid {
-                    sys {
-                        id
-                    }
-                    title
-                    contentCollection {
-                        items {
-                            sys {
-                                id
-                            }
-                            ... on MediaFile {
-                                sys {
-                                    id
-                                }
-                                __typename
-                                title
-                                file {
-                                    url
-                                }
-                            }
-                        }
-                    }
-                }
             }
         }
     }

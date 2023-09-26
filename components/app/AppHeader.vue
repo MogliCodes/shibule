@@ -19,13 +19,14 @@
             :key="`nav-item-${index}`"
           >
             <NuxtLink
-              class="block py-4"
+              class="block py-2 md:py-4"
               :to="getPagePath(item)"
               @click="toggleNavigation"
             >
-              <span class="font-bebas text-8xl font-bold hover:text-pink-500">{{
-                item.internalName || item.title
-              }}</span>
+              <span
+                class="font-serif text-3xl md:text-5xl font-bold hover:text-pink-500"
+                >{{ item.title || item.internalName }}</span
+              >
             </NuxtLink>
           </div>
         </nav>
@@ -79,18 +80,18 @@ const { data: mainNavigation } = await useAsyncGql({
 const navigationItems =
   mainNavigation?.value?.uiNavigation?.navigationItemsCollection?.items || []
 
-onMounted(() => {
-  const item = bodymovin.loadAnimation({
-    wrapper: document.getElementById('lottie-container'),
-    animType: 'svg',
-    loop: false,
-    autoplay: false,
-    path: 'shibule-logo.json',
-  })
-  setTimeout(() => {
-    item.goToAndPlay(0, true)
-  }, 100)
-})
+// onMounted(() => {
+//   const item = bodymovin.loadAnimation({
+//     wrapper: document.getElementById('lottie-container'),
+//     animType: 'svg',
+//     loop: false,
+//     autoplay: false,
+//     path: 'shibule-logo.json',
+//   })
+//   setTimeout(() => {
+//     item.goToAndPlay(0, true)
+//   }, 100)
+// })
 
 const isNavActive = ref(false)
 

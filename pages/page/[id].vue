@@ -1,21 +1,16 @@
 <template>
-  <div>
+  <div class="flex flex-col gap-8">
     <BaseContainer>
-      {{ page }}
-      <h1 class="font-bebas text-8xl">{{ page?.pageGeneric.title }}</h1>
-
-      <BaseGrid
-        v-for="(grid, index) in page?.pageGeneric.sectionsCollection.items"
-        :key="index"
-        :grid="grid"
-      />
+      <BaseHeadline :text="page?.pageGeneric.title" type="h1" />
     </BaseContainer>
     <BaseContainer>
-      <pre>
-      {{ page }}
-    </pre
-      >
+      <p v-if="pending">Data loading is pending</p>
     </BaseContainer>
+    <BaseGrid
+      v-for="(grid, index) in page?.pageGeneric.sectionsCollection.items"
+      :key="index"
+      :grid="grid"
+    />
   </div>
 </template>
 
@@ -23,7 +18,7 @@
 const route = useRoute()
 
 const pageId = route.params.id
-const { data: page } = await useAsyncGql({
+const { data: page, pending } = await useAsyncGql({
   operation: 'queryPageById',
   variables: {
     id: pageId,

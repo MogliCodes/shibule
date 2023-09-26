@@ -35,6 +35,7 @@ type AssetCollection {
 
 type AssetLinkingCollections {
     contentBrandCollection(limit: Int = 100, locale: String, order: [AssetLinkingCollectionsContentBrandCollectionOrder], preview: Boolean, skip: Int = 0): ContentBrandCollection
+    elementImageCollection(limit: Int = 100, locale: String, order: [AssetLinkingCollectionsElementImageCollectionOrder], preview: Boolean, skip: Int = 0): ElementImageCollection
     entryCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): EntryCollection
     mediaFileCollection(limit: Int = 100, locale: String, order: [AssetLinkingCollectionsMediaFileCollectionOrder], preview: Boolean, skip: Int = 0): MediaFileCollection
 }
@@ -87,6 +88,54 @@ type ContentBrandDescriptionResources {
 type ContentBrandLinkingCollections {
     entryCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): EntryCollection
     uiNavigationCollection(limit: Int = 100, locale: String, order: [ContentBrandLinkingCollectionsUiNavigationCollectionOrder], preview: Boolean, skip: Int = 0): UiNavigationCollection
+}
+
+"[See type definition](https://app.contentful.com/spaces/52n4e3ya8eqj/content_types/contentMagazineIssue)"
+type ContentMagazineIssue implements Entry {
+    contentfulMetadata: ContentfulMetadata!
+    description(locale: String): ContentMagazineIssueDescription
+    download(locale: String, preview: Boolean, where: MediaFileFilter): MediaFile
+    internalName(locale: String): String
+    issueNumber(locale: String): Int
+    linkedFrom(allowedLocales: [String]): ContentMagazineIssueLinkingCollections
+    sys: Sys!
+}
+
+type ContentMagazineIssueCollection {
+    items: [ContentMagazineIssue]!
+    limit: Int!
+    skip: Int!
+    total: Int!
+}
+
+type ContentMagazineIssueDescription {
+    json: JSON!
+    links: ContentMagazineIssueDescriptionLinks!
+}
+
+type ContentMagazineIssueDescriptionAssets {
+    block: [Asset]!
+    hyperlink: [Asset]!
+}
+
+type ContentMagazineIssueDescriptionEntries {
+    block: [Entry]!
+    hyperlink: [Entry]!
+    inline: [Entry]!
+}
+
+type ContentMagazineIssueDescriptionLinks {
+    assets: ContentMagazineIssueDescriptionAssets!
+    entries: ContentMagazineIssueDescriptionEntries!
+    resources: ContentMagazineIssueDescriptionResources!
+}
+
+type ContentMagazineIssueDescriptionResources {
+    block: [ResourceLink!]!
+}
+
+type ContentMagazineIssueLinkingCollections {
+    entryCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): EntryCollection
 }
 
 "[See type definition](https://app.contentful.com/spaces/52n4e3ya8eqj/content_types/contentMusicReview)"
@@ -169,6 +218,72 @@ type ContentfulTag {
     name: String
 }
 
+"[See type definition](https://app.contentful.com/spaces/52n4e3ya8eqj/content_types/elementImage)"
+type ElementImage implements Entry {
+    contentfulMetadata: ContentfulMetadata!
+    image(locale: String, preview: Boolean): Asset
+    internalName(locale: String): String
+    linkedFrom(allowedLocales: [String]): ElementImageLinkingCollections
+    sys: Sys!
+}
+
+type ElementImageCollection {
+    items: [ElementImage]!
+    limit: Int!
+    skip: Int!
+    total: Int!
+}
+
+type ElementImageLinkingCollections {
+    entryCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): EntryCollection
+}
+
+"[See type definition](https://app.contentful.com/spaces/52n4e3ya8eqj/content_types/elementText)"
+type ElementText implements Entry {
+    contentfulMetadata: ContentfulMetadata!
+    internalName(locale: String): String
+    linkedFrom(allowedLocales: [String]): ElementTextLinkingCollections
+    sys: Sys!
+    text(locale: String): ElementTextText
+}
+
+type ElementTextCollection {
+    items: [ElementText]!
+    limit: Int!
+    skip: Int!
+    total: Int!
+}
+
+type ElementTextLinkingCollections {
+    entryCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): EntryCollection
+}
+
+type ElementTextText {
+    json: JSON!
+    links: ElementTextTextLinks!
+}
+
+type ElementTextTextAssets {
+    block: [Asset]!
+    hyperlink: [Asset]!
+}
+
+type ElementTextTextEntries {
+    block: [Entry]!
+    hyperlink: [Entry]!
+    inline: [Entry]!
+}
+
+type ElementTextTextLinks {
+    assets: ElementTextTextAssets!
+    entries: ElementTextTextEntries!
+    resources: ElementTextTextResources!
+}
+
+type ElementTextTextResources {
+    block: [ResourceLink!]!
+}
+
 type EntryCollection {
     items: [Entry]!
     limit: Int!
@@ -178,6 +293,7 @@ type EntryCollection {
 
 "[See type definition](https://app.contentful.com/spaces/52n4e3ya8eqj/content_types/layoutGrid)"
 type LayoutGrid implements Entry {
+    columnCount(locale: String): Int
     contentCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): LayoutGridContentCollection
     contentfulMetadata: ContentfulMetadata!
     internalName(locale: String): String
@@ -222,6 +338,7 @@ type MediaFileCollection {
 }
 
 type MediaFileLinkingCollections {
+    contentMagazineIssueCollection(limit: Int = 100, locale: String, order: [MediaFileLinkingCollectionsContentMagazineIssueCollectionOrder], preview: Boolean, skip: Int = 0): ContentMagazineIssueCollection
     entryCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): EntryCollection
 }
 
@@ -313,8 +430,14 @@ type Query {
     assetCollection(limit: Int = 100, locale: String, order: [AssetOrder], preview: Boolean, skip: Int = 0, where: AssetFilter): AssetCollection
     contentBrand(id: String!, locale: String, preview: Boolean): ContentBrand
     contentBrandCollection(limit: Int = 100, locale: String, order: [ContentBrandOrder], preview: Boolean, skip: Int = 0, where: ContentBrandFilter): ContentBrandCollection
+    contentMagazineIssue(id: String!, locale: String, preview: Boolean): ContentMagazineIssue
+    contentMagazineIssueCollection(limit: Int = 100, locale: String, order: [ContentMagazineIssueOrder], preview: Boolean, skip: Int = 0, where: ContentMagazineIssueFilter): ContentMagazineIssueCollection
     contentMusicReview(id: String!, locale: String, preview: Boolean): ContentMusicReview
     contentMusicReviewCollection(limit: Int = 100, locale: String, order: [ContentMusicReviewOrder], preview: Boolean, skip: Int = 0, where: ContentMusicReviewFilter): ContentMusicReviewCollection
+    elementImage(id: String!, locale: String, preview: Boolean): ElementImage
+    elementImageCollection(limit: Int = 100, locale: String, order: [ElementImageOrder], preview: Boolean, skip: Int = 0, where: ElementImageFilter): ElementImageCollection
+    elementText(id: String!, locale: String, preview: Boolean): ElementText
+    elementTextCollection(limit: Int = 100, locale: String, order: [ElementTextOrder], preview: Boolean, skip: Int = 0, where: ElementTextFilter): ElementTextCollection
     entryCollection(limit: Int = 100, locale: String, order: [EntryOrder], preview: Boolean, skip: Int = 0, where: EntryFilter): EntryCollection
     layoutGrid(id: String!, locale: String, preview: Boolean): LayoutGrid
     layoutGridCollection(limit: Int = 100, locale: String, order: [LayoutGridOrder], preview: Boolean, skip: Int = 0, where: LayoutGridFilter): LayoutGridCollection
@@ -393,6 +516,19 @@ enum AssetLinkingCollectionsContentBrandCollectionOrder {
     title_DESC
 }
 
+enum AssetLinkingCollectionsElementImageCollectionOrder {
+    internalName_ASC
+    internalName_DESC
+    sys_firstPublishedAt_ASC
+    sys_firstPublishedAt_DESC
+    sys_id_ASC
+    sys_id_DESC
+    sys_publishedAt_ASC
+    sys_publishedAt_DESC
+    sys_publishedVersion_ASC
+    sys_publishedVersion_DESC
+}
+
 enum AssetLinkingCollectionsMediaFileCollectionOrder {
     internalName_ASC
     internalName_DESC
@@ -461,6 +597,21 @@ enum ContentBrandOrder {
     title_DESC
 }
 
+enum ContentMagazineIssueOrder {
+    internalName_ASC
+    internalName_DESC
+    issueNumber_ASC
+    issueNumber_DESC
+    sys_firstPublishedAt_ASC
+    sys_firstPublishedAt_DESC
+    sys_id_ASC
+    sys_id_DESC
+    sys_publishedAt_ASC
+    sys_publishedAt_DESC
+    sys_publishedVersion_ASC
+    sys_publishedVersion_DESC
+}
+
 enum ContentMusicReviewArtistCollectionOrder {
     internalName_ASC
     internalName_DESC
@@ -510,6 +661,32 @@ enum ContentMusicReviewOrder {
     sys_publishedVersion_DESC
     title_ASC
     title_DESC
+}
+
+enum ElementImageOrder {
+    internalName_ASC
+    internalName_DESC
+    sys_firstPublishedAt_ASC
+    sys_firstPublishedAt_DESC
+    sys_id_ASC
+    sys_id_DESC
+    sys_publishedAt_ASC
+    sys_publishedAt_DESC
+    sys_publishedVersion_ASC
+    sys_publishedVersion_DESC
+}
+
+enum ElementTextOrder {
+    internalName_ASC
+    internalName_DESC
+    sys_firstPublishedAt_ASC
+    sys_firstPublishedAt_DESC
+    sys_id_ASC
+    sys_id_DESC
+    sys_publishedAt_ASC
+    sys_publishedAt_DESC
+    sys_publishedVersion_ASC
+    sys_publishedVersion_DESC
 }
 
 enum EntryOrder {
@@ -592,6 +769,8 @@ enum ImageResizeStrategy {
 }
 
 enum LayoutGridOrder {
+    columnCount_ASC
+    columnCount_DESC
     internalName_ASC
     internalName_DESC
     sys_firstPublishedAt_ASC
@@ -604,6 +783,21 @@ enum LayoutGridOrder {
     sys_publishedVersion_DESC
     title_ASC
     title_DESC
+}
+
+enum MediaFileLinkingCollectionsContentMagazineIssueCollectionOrder {
+    internalName_ASC
+    internalName_DESC
+    issueNumber_ASC
+    issueNumber_DESC
+    sys_firstPublishedAt_ASC
+    sys_firstPublishedAt_DESC
+    sys_id_ASC
+    sys_id_DESC
+    sys_publishedAt_ASC
+    sys_publishedAt_DESC
+    sys_publishedVersion_ASC
+    sys_publishedVersion_DESC
 }
 
 enum MediaFileOrder {
@@ -905,6 +1099,34 @@ input ContentBrandFilter {
     title_not_in: [String]
 }
 
+input ContentMagazineIssueFilter {
+    AND: [ContentMagazineIssueFilter]
+    OR: [ContentMagazineIssueFilter]
+    contentfulMetadata: ContentfulMetadataFilter
+    description_contains: String
+    description_exists: Boolean
+    description_not_contains: String
+    download: cfMediaFileNestedFilter
+    download_exists: Boolean
+    internalName: String
+    internalName_contains: String
+    internalName_exists: Boolean
+    internalName_in: [String]
+    internalName_not: String
+    internalName_not_contains: String
+    internalName_not_in: [String]
+    issueNumber: Int
+    issueNumber_exists: Boolean
+    issueNumber_gt: Int
+    issueNumber_gte: Int
+    issueNumber_in: [Int]
+    issueNumber_lt: Int
+    issueNumber_lte: Int
+    issueNumber_not: Int
+    issueNumber_not_in: [Int]
+    sys: SysFilter
+}
+
 input ContentMusicReviewFilter {
     AND: [ContentMusicReviewFilter]
     OR: [ContentMusicReviewFilter]
@@ -969,6 +1191,38 @@ input ContentfulMetadataTagsFilter {
     id_contains_some: [String]
 }
 
+input ElementImageFilter {
+    AND: [ElementImageFilter]
+    OR: [ElementImageFilter]
+    contentfulMetadata: ContentfulMetadataFilter
+    image_exists: Boolean
+    internalName: String
+    internalName_contains: String
+    internalName_exists: Boolean
+    internalName_in: [String]
+    internalName_not: String
+    internalName_not_contains: String
+    internalName_not_in: [String]
+    sys: SysFilter
+}
+
+input ElementTextFilter {
+    AND: [ElementTextFilter]
+    OR: [ElementTextFilter]
+    contentfulMetadata: ContentfulMetadataFilter
+    internalName: String
+    internalName_contains: String
+    internalName_exists: Boolean
+    internalName_in: [String]
+    internalName_not: String
+    internalName_not_contains: String
+    internalName_not_in: [String]
+    sys: SysFilter
+    text_contains: String
+    text_exists: Boolean
+    text_not_contains: String
+}
+
 input EntryFilter {
     AND: [EntryFilter]
     OR: [EntryFilter]
@@ -1012,6 +1266,15 @@ input ImageTransformOptions {
 input LayoutGridFilter {
     AND: [LayoutGridFilter]
     OR: [LayoutGridFilter]
+    columnCount: Int
+    columnCount_exists: Boolean
+    columnCount_gt: Int
+    columnCount_gte: Int
+    columnCount_in: [Int]
+    columnCount_lt: Int
+    columnCount_lte: Int
+    columnCount_not: Int
+    columnCount_not_in: [Int]
     contentCollection_exists: Boolean
     contentfulMetadata: ContentfulMetadataFilter
     internalName: String
@@ -1199,6 +1462,28 @@ input UiNavigationNavigationItemsFilter {
     slug_not: String
     slug_not_contains: String
     slug_not_in: [String]
+    sys: SysFilter
+    title: String
+    title_contains: String
+    title_exists: Boolean
+    title_in: [String]
+    title_not: String
+    title_not_contains: String
+    title_not_in: [String]
+}
+
+input cfMediaFileNestedFilter {
+    AND: [cfMediaFileNestedFilter]
+    OR: [cfMediaFileNestedFilter]
+    contentfulMetadata: ContentfulMetadataFilter
+    file_exists: Boolean
+    internalName: String
+    internalName_contains: String
+    internalName_exists: Boolean
+    internalName_in: [String]
+    internalName_not: String
+    internalName_not_contains: String
+    internalName_not_in: [String]
     sys: SysFilter
     title: String
     title_contains: String

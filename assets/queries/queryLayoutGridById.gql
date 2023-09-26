@@ -1,0 +1,47 @@
+query queryLayoutGridById ($id: String!) {
+    layoutGrid(id: $id) {
+        sys {
+            id
+        }
+        title
+        columnCount
+        contentCollection {
+            items {
+                __typename
+                ... on ContentMagazineIssue {
+                    internalName
+                    issueNumber
+                    description {
+                        json
+                    }
+                    download {
+                        title
+                        file {
+                            url
+                        }
+                    }
+                }
+                ... on ElementText {
+                    __typename
+                    internalName
+                    text {
+                        json
+                    }
+                }
+                ... on ElementImage {
+                    __typename
+                }
+                ... on MediaFile {
+                    sys {
+                        id
+                    }
+                    __typename
+                    title
+                    file {
+                        url
+                    }
+                }
+            }
+        }
+    }
+}

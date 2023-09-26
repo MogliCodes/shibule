@@ -1,21 +1,23 @@
 <template>
-  <div class="container mx-auto mb-12">
-    <h2 class="font-bebas text-8xl font-bold">The Brands</h2>
-  </div>
-  <div class="container mx-auto grid grid-cols-4 gap-8">
+  <BaseContainer class="mb-12">
+    <BaseHeadline text="The Brands" type="h2" />
+  </BaseContainer>
+  <BaseContainer
+    class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8"
+  >
     <NuxtLink
       v-for="(brand, index) in brands.contentBrandCollection.items"
       :key="index"
       :to="`/brand/${brand.sys.id}`"
       class="self-start rounded-xl p-8 shadow-xl"
     >
-      <figure class="mb-5 w-20">
-        <img :src="brand?.logo?.url" alt="" />
+      <figure class="mb-5">
+        <img class="h-20" :src="brand?.logo?.url" alt="" />
       </figure>
-      <h3 class="text-xl font-bold">{{ brand.title }}</h3>
+      <h3 class="text-xl font-bold">{{ brand?.title }}</h3>
       <RichTextRenderer :document="brand?.description?.json" />
     </NuxtLink>
-  </div>
+  </BaseContainer>
 </template>
 
 <script setup>
