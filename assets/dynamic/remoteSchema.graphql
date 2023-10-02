@@ -35,6 +35,7 @@ type AssetCollection {
 
 type AssetLinkingCollections {
     contentBrandCollection(limit: Int = 100, locale: String, order: [AssetLinkingCollectionsContentBrandCollectionOrder], preview: Boolean, skip: Int = 0): ContentBrandCollection
+    contentMagazineIssueCollection(limit: Int = 100, locale: String, order: [AssetLinkingCollectionsContentMagazineIssueCollectionOrder], preview: Boolean, skip: Int = 0): ContentMagazineIssueCollection
     elementImageCollection(limit: Int = 100, locale: String, order: [AssetLinkingCollectionsElementImageCollectionOrder], preview: Boolean, skip: Int = 0): ElementImageCollection
     entryCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): EntryCollection
     mediaFileCollection(limit: Int = 100, locale: String, order: [AssetLinkingCollectionsMediaFileCollectionOrder], preview: Boolean, skip: Int = 0): MediaFileCollection
@@ -93,6 +94,7 @@ type ContentBrandLinkingCollections {
 "[See type definition](https://app.contentful.com/spaces/52n4e3ya8eqj/content_types/contentMagazineIssue)"
 type ContentMagazineIssue implements Entry {
     contentfulMetadata: ContentfulMetadata!
+    cover(locale: String, preview: Boolean): Asset
     description(locale: String): ContentMagazineIssueDescription
     download(locale: String, preview: Boolean, where: MediaFileFilter): MediaFile
     internalName(locale: String): String
@@ -514,6 +516,21 @@ enum AssetLinkingCollectionsContentBrandCollectionOrder {
     sys_publishedVersion_DESC
     title_ASC
     title_DESC
+}
+
+enum AssetLinkingCollectionsContentMagazineIssueCollectionOrder {
+    internalName_ASC
+    internalName_DESC
+    issueNumber_ASC
+    issueNumber_DESC
+    sys_firstPublishedAt_ASC
+    sys_firstPublishedAt_DESC
+    sys_id_ASC
+    sys_id_DESC
+    sys_publishedAt_ASC
+    sys_publishedAt_DESC
+    sys_publishedVersion_ASC
+    sys_publishedVersion_DESC
 }
 
 enum AssetLinkingCollectionsElementImageCollectionOrder {
@@ -1103,6 +1120,7 @@ input ContentMagazineIssueFilter {
     AND: [ContentMagazineIssueFilter]
     OR: [ContentMagazineIssueFilter]
     contentfulMetadata: ContentfulMetadataFilter
+    cover_exists: Boolean
     description_contains: String
     description_exists: Boolean
     description_not_contains: String

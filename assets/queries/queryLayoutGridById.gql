@@ -11,6 +11,9 @@ query queryLayoutGridById ($id: String!) {
                 ... on ContentMagazineIssue {
                     internalName
                     issueNumber
+                    cover {
+                        url
+                    }
                     description {
                         json
                     }
@@ -30,6 +33,12 @@ query queryLayoutGridById ($id: String!) {
                 }
                 ... on ElementImage {
                     __typename
+                    image {
+                        title
+                        description
+                        url
+                        fileName
+                    }
                 }
                 ... on MediaFile {
                     sys {

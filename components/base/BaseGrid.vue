@@ -1,7 +1,7 @@
 <template>
   <section>
     <BaseContainer class="flex flex-col gap-8">
-      <BaseHeadline :text="grid.layoutGrid.title" type="h3" />
+      <BaseHeadline :text="grid.layoutGrid?.title" type="h3" />
       <div class="grid gap-8" :class="gridClass">
         <div v-for="element in grid.layoutGrid.contentCollection.items">
           <component
@@ -53,6 +53,8 @@ function resolveComponentByTypename(typename) {
   switch (typename) {
     case 'ElementText':
       return resolveComponent('ElementText')
+    case 'ElementImage':
+      return resolveComponent('ElementImage')
     case 'MediaFile':
       return resolveComponent('MediaFile')
     case 'ContentMagazineIssue':
