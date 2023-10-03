@@ -1,5 +1,5 @@
 <template>
-  <div class="p-8 bg-gray-100 rounded-xl p-8 shadow-xl">
+  <div class="p-8 bg-gray-100 rounded-xl p-8 shadow-xl h-full">
     <img class="block mb-8" :src="cover?.url" alt="" />
     <RichTextRenderer :document="description?.json" />
     <a :href="download?.file?.url">{{ download?.title }}</a>
