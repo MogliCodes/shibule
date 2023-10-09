@@ -1,13 +1,13 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   app: {
-    // head: {
-    //   script: [
-    //     {
-    //       src: 'https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.9.1/lottie.min.js',
-    //     },
-    //   ],
-    // },
+    head: {
+      script: [
+        {
+          src: 'https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.9.1/lottie.min.js',
+        },
+      ],
+    },
   },
   runtimeConfig: {
     public: {
