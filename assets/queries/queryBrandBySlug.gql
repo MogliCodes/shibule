@@ -4,5 +4,13 @@ query queryBrandBySlug($id: String!) {
         description {
             json
         }
+        logo {
+            url
+        }
+        sectionsCollection {
+            items {
+                ...grid
+            }
+        }
     }
 }

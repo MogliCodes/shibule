@@ -1,0 +1,8 @@
+fragment grid on LayoutGrid {
+    sys {
+        id
+    }
+    internalName
+    columnCount
+
+}

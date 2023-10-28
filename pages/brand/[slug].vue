@@ -1,12 +1,24 @@
 <template>
-  <BaseContainer v-if="brand">
-    <h1 class="font-bebas mb-20 text-8xl">{{ brand?.contentBrand.title }}</h1>
-    <div class="w-1/4 text-xl font-light leading-loose">
-      <RichTextRenderer
-        class=""
-        :document="brand?.contentBrand?.description?.json"
-      />
+  <BaseContainer v-if="brand" class="flex flex-col gap-20">
+    <BaseHeadline :text="brand.contentBrand.title" type="h1" />
+    <div class="flex">
+      <div class="w-1/2 text-xl font-light leading-loose">
+        <RichTextRenderer
+          class=""
+          :document="brand?.contentBrand?.description?.json"
+        />
+      </div>
+      <div class="w-1/2">
+        <img :src="brand?.contentBrand?.logo?.url" alt="" />
+      </div>
     </div>
+  </BaseContainer>
+  <BaseContainer>
+    <BaseGrid
+      v-for="(grid, index) in brand?.contentBrand?.sectionsCollection.items"
+      :key="index"
+      :grid="grid"
+    />
   </BaseContainer>
 </template>
 
@@ -19,6 +31,9 @@ type Brand = {
     title: string
     description: {
       json: object
+    }
+    logo: {
+      url: string
     }
   }
 }

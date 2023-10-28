@@ -9,13 +9,9 @@
       v-for="(brand, index) in brands.contentBrandCollection.items"
       :key="index"
       :to="`/brand/${brand.sys.id}`"
-      class="self-start rounded-xl p-8 shadow-xl"
+      class="card relative self-start rounded-3xl shadow-xl"
     >
-      <figure class="mb-5">
-        <img class="h-20" :src="brand?.logo?.url" alt="" />
-      </figure>
-      <h3 class="text-xl font-bold">{{ brand?.title }}</h3>
-      <RichTextRenderer :document="brand?.description?.json" />
+      <img :src="brand?.cardImage?.url" alt="" />
     </NuxtLink>
   </BaseContainer>
 </template>
@@ -27,3 +23,17 @@ const { data: brands } = await useAsyncGql({
   operation: 'queryBrands',
 })
 </script>
+
+<style>
+.card:after {
+  border-radius: 50px;
+  content: '';
+  position: absolute;
+  background-color: black;
+  top: 8px;
+  left: -10px;
+  right: 10px;
+  bottom: -8px;
+  z-index: -1;
+}
+</style>

@@ -9,6 +9,9 @@ query queryBrands {
            logo {
                url
            }
+            cardImage {
+                url
+            }
             description {
                 json
             }

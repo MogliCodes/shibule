@@ -26,6 +26,7 @@
   "dependencies": {
     "contentful-cli": "^2.6.46",
     "contentful-rich-text-vue-renderer": "^3.1.0",
-    "nuxt-graphql-client": "^0.2.30"
+    "nuxt-graphql-client": "^0.2.30",
+    "vue3-youtube": "^0.1.9"
   }
 }
