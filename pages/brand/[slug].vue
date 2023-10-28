@@ -1,25 +1,29 @@
 <template>
-  <BaseContainer v-if="brand" class="flex flex-col gap-20">
-    <BaseHeadline :text="brand.contentBrand.title" type="h1" />
-    <div class="flex">
-      <div class="w-1/2 text-xl font-light leading-loose">
-        <RichTextRenderer
-          class=""
-          :document="brand?.contentBrand?.description?.json"
-        />
+  <div class="flex flex-col gap-20">
+    <BaseContainer v-if="brand" class="flex flex-col">
+      <div class="flex gap-20">
+        <div class="w-1/2 text-xl font-light leading-loose">
+          <BaseHeadline
+            class="mb-20"
+            :text="brand.contentBrand.title"
+            type="h1"
+          />
+          <RichTextRenderer
+            class=""
+            :document="brand?.contentBrand?.description?.json"
+          />
+        </div>
+        <div class="w-1/2 flex bg-gray-200 p-20 rounded-xl">
+          <img :src="brand?.contentBrand?.logo?.url" alt="" />
+        </div>
       </div>
-      <div class="w-1/2">
-        <img :src="brand?.contentBrand?.logo?.url" alt="" />
-      </div>
-    </div>
-  </BaseContainer>
-  <BaseContainer>
+    </BaseContainer>
     <BaseGrid
       v-for="(grid, index) in brand?.contentBrand?.sectionsCollection.items"
       :key="index"
       :grid="grid"
     />
-  </BaseContainer>
+  </div>
 </template>
 
 <script setup lang="ts">

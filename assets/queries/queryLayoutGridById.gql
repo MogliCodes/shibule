@@ -40,6 +40,13 @@ query queryLayoutGridById ($id: String!) {
                         fileName
                     }
                 }
+                ... on ElementTechnical {
+                    internalName
+                    sys {
+                        id
+                    }
+                    data
+                }
                 ... on MediaFile {
                     sys {
                         id

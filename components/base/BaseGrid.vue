@@ -3,7 +3,7 @@
     <BaseContainer class="flex flex-col gap-8">
       <BaseHeadline :text="grid.layoutGrid?.title" type="h3" />
       <div class="grid gap-8" :class="gridClass">
-        <div v-for="element in grid.layoutGrid.contentCollection.items">
+        <div v-for="element in grid?.layoutGrid?.contentCollection?.items">
           <component
             v-bind="element"
             :is="resolveComponentByTypename(element.__typename)"
@@ -32,7 +32,7 @@ const props = defineProps<Props>()
 const { data: grid, pending } = await useAsyncGql({
   operation: 'queryLayoutGridById',
   variables: {
-    id: props.grid.sys.id,
+    id: props.grid?.sys?.id,
   },
 })
 
@@ -55,6 +55,8 @@ function resolveComponentByTypename(typename) {
       return resolveComponent('ElementText')
     case 'ElementImage':
       return resolveComponent('ElementImage')
+    case 'ElementTechnical':
+      return resolveComponent('ElementTechnical')
     case 'MediaFile':
       return resolveComponent('MediaFile')
     case 'ContentMagazineIssue':
