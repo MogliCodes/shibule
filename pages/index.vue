@@ -8,7 +8,7 @@
     <BaseContainer>
       <BaseHeadline class="mb-10" text="New Stuff" type="h2" />
       <div class="grid grid-cols-3 gap-20">
-        <div class="relative rounded-xl" v-for="video in data.items">
+        <div class="relative rounded-xl" v-for="video in data?.items">
           <client-only>
             <component
               is="script"

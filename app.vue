@@ -5,11 +5,13 @@
       <NuxtPage />
     </NuxtLayout>
     <AppFooter />
+    <AppCookieConsent />
   </div>
 </template>
 
 <script setup>
 import AppFooter from '~/components/app/AppFooter.vue'
+import AppCookieConsent from '~/components/app/AppCookieConsent.vue'
 
 const slugFormatted = 'startseite'
 const { data: pageData } = await useAsyncGql({
