@@ -6,6 +6,7 @@
     <BrandsList />
     <ContentRecent />
     <BaseContainer>
+      <p>{{ pending }}</p>
       <div class="grid grid-cols-3 gap-20">
         <div v-for="video in data.items">
           <client-only>

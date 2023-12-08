@@ -2,14 +2,13 @@
   <div class="flex flex-col gap-20">
     <BaseContainer v-if="brand" class="flex flex-col">
       <div class="flex gap-20">
-        <div class="w-1/2 text-xl font-light leading-loose">
+        <div class="w-1/2 text-xl font-light leading-8">
           <BaseHeadline
             class="mb-20"
             :text="brand.contentBrand.title"
             type="h1"
           />
           <RichTextRenderer
-            class=""
             :document="brand?.contentBrand?.description?.json"
           />
         </div>

@@ -3,7 +3,7 @@
     <BaseHeadline text="The Brands" type="h2" />
   </BaseContainer>
   <BaseContainer
-    class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8"
+    class="grid content-center sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8"
   >
     <NuxtLink
       v-for="(brand, index) in brands.contentBrandCollection.items"

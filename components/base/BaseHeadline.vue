@@ -14,6 +14,8 @@ const STYLE_MAP = {
   h1: 'text-8xl font-serif font-bold',
   h2: 'text-8xl font-serif font-bold',
   h3: 'text-2xl font-serif font-bold',
+  h4: 'text-lg font-bold',
+  h5: 'font-bold',
 }
 
 const fontClass = computed<string>(() => {

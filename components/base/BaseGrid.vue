@@ -51,6 +51,8 @@ const gridClass = computed<string>(() => {
 })
 function resolveComponentByTypename(typename) {
   switch (typename) {
+    case 'ContentProject':
+      return resolveComponent('ContentProject')
     case 'ElementText':
       return resolveComponent('ElementText')
     case 'ElementImage':
