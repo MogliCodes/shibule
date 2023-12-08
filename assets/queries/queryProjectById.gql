@@ -1,0 +1,11 @@
+query queryProjectById($id: String!) {
+    contentProject(id: $id) {
+        sys {
+            id
+        }
+        name
+        description {
+            json
+        }
+    }
+}

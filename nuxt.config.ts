@@ -4,7 +4,7 @@ export default defineNuxtConfig({
     head: {
       script: [
         {
-          src: 'https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.9.1/lottie.min.js',
+          src: 'https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.12.2/lottie.min.js',
         },
       ],
     },

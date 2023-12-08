@@ -1,24 +1,27 @@
 <template>
-  <div class="flex flex-col gap-20">
+  <div class="flex flex-col gap-40">
     <section class="h-screen">
       <div id="lottie-container" class="h-screen"></div>
     </section>
     <BrandsList />
-    <ContentRecent />
+    <!--    <ContentRecent />-->
     <BaseContainer>
-      <p>{{ pending }}</p>
+      <BaseHeadline class="mb-10" text="New Stuff" type="h2" />
       <div class="grid grid-cols-3 gap-20">
-        <div v-for="video in data.items">
+        <div class="relative rounded-xl" v-for="video in data.items">
           <client-only>
             <component
               is="script"
               id="youtube-iframe-js-api-script"
               src="https://www.youtube.com/iframe_api"
             />
-            <iframe
-              class="w-full aspect-video mb-8"
-              :src="iframeSrc(video.id.videoId)"
-            />
+            <div class="rounded-2xl overflow-hidden aspect-video">
+              <iframe
+                class="relative z-10 w-full aspect-video mb-8"
+                :src="iframeSrc(video.id.videoId)"
+              />
+              <BaseSkeleton class="absolute top-0 z-0 aspect-video mb-8" />
+            </div>
             <p class="mb-2">{{ formatDate(video.snippet.publishedAt) }}</p>
             <BaseHeadline class="mb-4" type="h3" :text="video.snippet.title" />
             <p>{{ video.snippet.description }}</p>
