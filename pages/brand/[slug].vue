@@ -18,7 +18,7 @@
       </div>
     </BaseContainer>
     <BaseGrid
-      v-for="(grid, index) in brand?.contentBrand?.sectionsCollection.items"
+      v-for="(grid, index) in brand?.contentBrand?.sectionsCollection?.items"
       :key="index"
       :grid="grid"
     />

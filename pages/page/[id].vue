@@ -7,7 +7,7 @@
       <p v-if="pending">Data loading is pending</p>
     </BaseContainer>
     <BaseGrid
-      v-for="(grid, index) in page?.pageGeneric.sectionsCollection.items"
+      v-for="(grid, index) in page?.pageGeneric.sectionsCollection?.items"
       :key="index"
       :grid="grid"
     />

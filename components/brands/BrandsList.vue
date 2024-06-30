@@ -7,7 +7,7 @@
       class="grid content-center sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8"
     >
       <NuxtLink
-        v-for="(brand, index) in brands.contentBrandCollection.items"
+        v-for="(brand, index) in brands.contentBrandCollection?.items"
         :key="index"
         :to="`/brand/${brand.sys.id}`"
         class="relative self-start"

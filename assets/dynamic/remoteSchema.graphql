@@ -36,12 +36,12 @@ type AssetCollection {
 }
 
 type AssetLinkingCollections {
-    contentBrandCollection(limit: Int = 100, locale: String, order: [AssetLinkingCollectionsContentBrandCollectionOrder], preview: Boolean, skip: Int = 0): ContentBrandCollection
-    contentMagazineIssueCollection(limit: Int = 100, locale: String, order: [AssetLinkingCollectionsContentMagazineIssueCollectionOrder], preview: Boolean, skip: Int = 0): ContentMagazineIssueCollection
-    contentProjectCollection(limit: Int = 100, locale: String, order: [AssetLinkingCollectionsContentProjectCollectionOrder], preview: Boolean, skip: Int = 0): ContentProjectCollection
-    elementImageCollection(limit: Int = 100, locale: String, order: [AssetLinkingCollectionsElementImageCollectionOrder], preview: Boolean, skip: Int = 0): ElementImageCollection
+    contentBrandCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): ContentBrandCollection
+    contentMagazineIssueCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): ContentMagazineIssueCollection
+    contentProjectCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): ContentProjectCollection
+    elementImageCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): ElementImageCollection
     entryCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): EntryCollection
-    mediaFileCollection(limit: Int = 100, locale: String, order: [AssetLinkingCollectionsMediaFileCollectionOrder], preview: Boolean, skip: Int = 0): MediaFileCollection
+    mediaFileCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): MediaFileCollection
 }
 
 "[See type definition](https://app.contentful.com/spaces/52n4e3ya8eqj/content_types/contentBrand)"
@@ -235,6 +235,7 @@ type ContentProject implements Entry {
     logo(locale: String, preview: Boolean): Asset
     name(locale: String): String
     sys: Sys!
+    teaserImage(locale: String, preview: Boolean): Asset
 }
 
 type ContentProjectBrandCollection {
@@ -606,81 +607,6 @@ type UiNavigationNavigationItemsCollection {
     limit: Int!
     skip: Int!
     total: Int!
-}
-
-enum AssetLinkingCollectionsContentBrandCollectionOrder {
-    internalName_ASC
-    internalName_DESC
-    slug_ASC
-    slug_DESC
-    sys_firstPublishedAt_ASC
-    sys_firstPublishedAt_DESC
-    sys_id_ASC
-    sys_id_DESC
-    sys_publishedAt_ASC
-    sys_publishedAt_DESC
-    sys_publishedVersion_ASC
-    sys_publishedVersion_DESC
-    title_ASC
-    title_DESC
-}
-
-enum AssetLinkingCollectionsContentMagazineIssueCollectionOrder {
-    internalName_ASC
-    internalName_DESC
-    issueNumber_ASC
-    issueNumber_DESC
-    sys_firstPublishedAt_ASC
-    sys_firstPublishedAt_DESC
-    sys_id_ASC
-    sys_id_DESC
-    sys_publishedAt_ASC
-    sys_publishedAt_DESC
-    sys_publishedVersion_ASC
-    sys_publishedVersion_DESC
-}
-
-enum AssetLinkingCollectionsContentProjectCollectionOrder {
-    internalName_ASC
-    internalName_DESC
-    name_ASC
-    name_DESC
-    sys_firstPublishedAt_ASC
-    sys_firstPublishedAt_DESC
-    sys_id_ASC
-    sys_id_DESC
-    sys_publishedAt_ASC
-    sys_publishedAt_DESC
-    sys_publishedVersion_ASC
-    sys_publishedVersion_DESC
-}
-
-enum AssetLinkingCollectionsElementImageCollectionOrder {
-    internalName_ASC
-    internalName_DESC
-    sys_firstPublishedAt_ASC
-    sys_firstPublishedAt_DESC
-    sys_id_ASC
-    sys_id_DESC
-    sys_publishedAt_ASC
-    sys_publishedAt_DESC
-    sys_publishedVersion_ASC
-    sys_publishedVersion_DESC
-}
-
-enum AssetLinkingCollectionsMediaFileCollectionOrder {
-    internalName_ASC
-    internalName_DESC
-    sys_firstPublishedAt_ASC
-    sys_firstPublishedAt_DESC
-    sys_id_ASC
-    sys_id_DESC
-    sys_publishedAt_ASC
-    sys_publishedAt_DESC
-    sys_publishedVersion_ASC
-    sys_publishedVersion_DESC
-    title_ASC
-    title_DESC
 }
 
 enum AssetOrder {
@@ -1490,6 +1416,7 @@ input ContentProjectFilter {
     name_not_contains: String
     name_not_in: [String]
     sys: SysFilter
+    teaserImage_exists: Boolean
 }
 
 input ContentfulMetadataFilter {

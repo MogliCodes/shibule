@@ -5,7 +5,7 @@
       <NuxtPage />
     </NuxtLayout>
     <AppFooter />
-    <AppCookieConsent />
+    <!--    <AppCookieConsent />-->
   </div>
 </template>
 

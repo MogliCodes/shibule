@@ -1,4 +1,5 @@
 <template>
+  <img class="rounded-xl mb-4" :src="props?.teaserImage?.url" alt="" />
   <BaseHeadline :text="props.name" type="h4" />
   <RichTextRenderer :document="props.description.json" />
   <NuxtLink :to="`/project/${props.sys.id}`">Go to project</NuxtLink>
@@ -17,6 +18,9 @@ type Props = {
       content: []
       data: {}
     }
+  }
+  teaserImage: {
+    url: string
   }
 }
 

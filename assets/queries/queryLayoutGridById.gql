@@ -33,6 +33,9 @@ query queryLayoutGridById ($id: String!) {
                     description {
                         json
                     }
+                    teaserImage {
+                        url
+                    }
                     logo {
                         url
                     }
