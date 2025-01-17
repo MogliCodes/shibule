@@ -24,6 +24,29 @@ query queryLayoutGridById ($id: String!) {
                         }
                     }
                 }
+                ... on ContentProject {
+                    internalName
+                    sys {
+                        id
+                    }
+                    name
+                    description {
+                        json
+                    }
+                    teaserImage {
+                        url
+                    }
+                    logo {
+                        url
+                    }
+                    brandCollection {
+                        items {
+                            sys {
+                                id
+                            }
+                        }
+                    }
+                }
                 ... on ElementText {
                     __typename
                     internalName
@@ -55,6 +78,12 @@ query queryLayoutGridById ($id: String!) {
                     title
                     file {
                         url
+                    }
+                }
+                ... on ContentBrand {
+                    title
+                    description {
+                        json
                     }
                 }
             }

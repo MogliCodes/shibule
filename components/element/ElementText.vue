@@ -14,3 +14,12 @@ type Props = {
 }
 defineProps<Props>()
 </script>
+
+<style>
+h2 {
+  @apply text-3xl font-serif font-bold !text-4xl mb-4;
+  //font-size: 2rem;
+  //font-weight: 700;
+  //margin-bottom: 1rem;
+}
+</style>

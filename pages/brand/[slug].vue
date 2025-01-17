@@ -1,25 +1,18 @@
 <template>
-  <div class="flex flex-col gap-20">
+  <div
+    :style="`background-color: ${brand.contentBrand.backgroundColor}`"
+    class="flex flex-col gap-20"
+  >
     <BaseContainer v-if="brand" class="flex flex-col">
-      <div class="flex gap-20">
-        <div class="w-1/2 text-xl font-light leading-loose">
-          <BaseHeadline
-            class="mb-20"
-            :text="brand.contentBrand.title"
-            type="h1"
-          />
-          <RichTextRenderer
-            class=""
-            :document="brand?.contentBrand?.description?.json"
-          />
-        </div>
-        <div class="w-1/2 flex bg-gray-200 p-20 rounded-xl">
+      <div class="flex justify-center pt-40">
+        <div class="w-2/3 flex p-20 rounded-xl">
           <img :src="brand?.contentBrand?.logo?.url" alt="" />
         </div>
       </div>
     </BaseContainer>
     <BaseGrid
-      v-for="(grid, index) in brand?.contentBrand?.sectionsCollection.items"
+      class="last-of-type:pb-20"
+      v-for="(grid, index) in brand?.contentBrand?.sectionsCollection?.items"
       :key="index"
       :grid="grid"
     />

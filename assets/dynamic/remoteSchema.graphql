@@ -9,6 +9,14 @@ interface Entry {
     sys: Sys!
 }
 
+interface ResourceLink {
+    sys: ResourceSys!
+}
+
+interface _Node {
+    _id: ID!
+}
+
 union ContentBrandSectionsItem = ElementImage | ElementTechnical | ElementText | LayoutGrid
 
 union UiNavigationNavigationItemsItem = ContentBrand | PageGeneric
@@ -36,15 +44,17 @@ type AssetCollection {
 }
 
 type AssetLinkingCollections {
-    contentBrandCollection(limit: Int = 100, locale: String, order: [AssetLinkingCollectionsContentBrandCollectionOrder], preview: Boolean, skip: Int = 0): ContentBrandCollection
-    contentMagazineIssueCollection(limit: Int = 100, locale: String, order: [AssetLinkingCollectionsContentMagazineIssueCollectionOrder], preview: Boolean, skip: Int = 0): ContentMagazineIssueCollection
-    elementImageCollection(limit: Int = 100, locale: String, order: [AssetLinkingCollectionsElementImageCollectionOrder], preview: Boolean, skip: Int = 0): ElementImageCollection
+    contentBrandCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): ContentBrandCollection
+    contentMagazineIssueCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): ContentMagazineIssueCollection
+    contentProjectCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): ContentProjectCollection
+    elementImageCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): ElementImageCollection
     entryCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): EntryCollection
-    mediaFileCollection(limit: Int = 100, locale: String, order: [AssetLinkingCollectionsMediaFileCollectionOrder], preview: Boolean, skip: Int = 0): MediaFileCollection
+    mediaFileCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): MediaFileCollection
 }
 
 "[See type definition](https://app.contentful.com/spaces/52n4e3ya8eqj/content_types/contentBrand)"
 type ContentBrand implements Entry {
+    backgroundColor(locale: String): String
     cardImage(locale: String, preview: Boolean): Asset
     contentfulMetadata: ContentfulMetadata!
     description(locale: String): ContentBrandDescription
@@ -87,12 +97,25 @@ type ContentBrandDescriptionLinks {
 }
 
 type ContentBrandDescriptionResources {
-    block: [ResourceLink!]!
-    hyperlink: [ResourceLink!]!
-    inline: [ResourceLink!]!
+    block: [ContentBrandDescriptionResourcesBlock!]!
+    hyperlink: [ContentBrandDescriptionResourcesHyperlink!]!
+    inline: [ContentBrandDescriptionResourcesInline!]!
+}
+
+type ContentBrandDescriptionResourcesBlock implements ResourceLink {
+    sys: ResourceSys!
+}
+
+type ContentBrandDescriptionResourcesHyperlink implements ResourceLink {
+    sys: ResourceSys!
+}
+
+type ContentBrandDescriptionResourcesInline implements ResourceLink {
+    sys: ResourceSys!
 }
 
 type ContentBrandLinkingCollections {
+    contentProjectCollection(limit: Int = 100, locale: String, order: [ContentBrandLinkingCollectionsContentProjectCollectionOrder], preview: Boolean, skip: Int = 0): ContentProjectCollection
     entryCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): EntryCollection
     uiNavigationCollection(limit: Int = 100, locale: String, order: [ContentBrandLinkingCollectionsUiNavigationCollectionOrder], preview: Boolean, skip: Int = 0): UiNavigationCollection
 }
@@ -146,9 +169,21 @@ type ContentMagazineIssueDescriptionLinks {
 }
 
 type ContentMagazineIssueDescriptionResources {
-    block: [ResourceLink!]!
-    hyperlink: [ResourceLink!]!
-    inline: [ResourceLink!]!
+    block: [ContentMagazineIssueDescriptionResourcesBlock!]!
+    hyperlink: [ContentMagazineIssueDescriptionResourcesHyperlink!]!
+    inline: [ContentMagazineIssueDescriptionResourcesInline!]!
+}
+
+type ContentMagazineIssueDescriptionResourcesBlock implements ResourceLink {
+    sys: ResourceSys!
+}
+
+type ContentMagazineIssueDescriptionResourcesHyperlink implements ResourceLink {
+    sys: ResourceSys!
+}
+
+type ContentMagazineIssueDescriptionResourcesInline implements ResourceLink {
+    sys: ResourceSys!
 }
 
 type ContentMagazineIssueLinkingCollections {
@@ -218,9 +253,92 @@ type ContentMusicReviewTextLinks {
 }
 
 type ContentMusicReviewTextResources {
-    block: [ResourceLink!]!
-    hyperlink: [ResourceLink!]!
-    inline: [ResourceLink!]!
+    block: [ContentMusicReviewTextResourcesBlock!]!
+    hyperlink: [ContentMusicReviewTextResourcesHyperlink!]!
+    inline: [ContentMusicReviewTextResourcesInline!]!
+}
+
+type ContentMusicReviewTextResourcesBlock implements ResourceLink {
+    sys: ResourceSys!
+}
+
+type ContentMusicReviewTextResourcesHyperlink implements ResourceLink {
+    sys: ResourceSys!
+}
+
+type ContentMusicReviewTextResourcesInline implements ResourceLink {
+    sys: ResourceSys!
+}
+
+"[See type definition](https://app.contentful.com/spaces/52n4e3ya8eqj/content_types/contentProject)"
+type ContentProject implements Entry {
+    brandCollection(limit: Int = 100, locale: String, order: [ContentProjectBrandCollectionOrder], preview: Boolean, skip: Int = 0, where: ContentBrandFilter): ContentProjectBrandCollection
+    contentfulMetadata: ContentfulMetadata!
+    description(locale: String): ContentProjectDescription
+    internalName(locale: String): String
+    linkedFrom(allowedLocales: [String]): ContentProjectLinkingCollections
+    logo(locale: String, preview: Boolean): Asset
+    name(locale: String): String
+    sys: Sys!
+    teaserImage(locale: String, preview: Boolean): Asset
+}
+
+type ContentProjectBrandCollection {
+    items: [ContentBrand]!
+    limit: Int!
+    skip: Int!
+    total: Int!
+}
+
+type ContentProjectCollection {
+    items: [ContentProject]!
+    limit: Int!
+    skip: Int!
+    total: Int!
+}
+
+type ContentProjectDescription {
+    json: JSON!
+    links: ContentProjectDescriptionLinks!
+}
+
+type ContentProjectDescriptionAssets {
+    block: [Asset]!
+    hyperlink: [Asset]!
+}
+
+type ContentProjectDescriptionEntries {
+    block: [Entry]!
+    hyperlink: [Entry]!
+    inline: [Entry]!
+}
+
+type ContentProjectDescriptionLinks {
+    assets: ContentProjectDescriptionAssets!
+    entries: ContentProjectDescriptionEntries!
+    resources: ContentProjectDescriptionResources!
+}
+
+type ContentProjectDescriptionResources {
+    block: [ContentProjectDescriptionResourcesBlock!]!
+    hyperlink: [ContentProjectDescriptionResourcesHyperlink!]!
+    inline: [ContentProjectDescriptionResourcesInline!]!
+}
+
+type ContentProjectDescriptionResourcesBlock implements ResourceLink {
+    sys: ResourceSys!
+}
+
+type ContentProjectDescriptionResourcesHyperlink implements ResourceLink {
+    sys: ResourceSys!
+}
+
+type ContentProjectDescriptionResourcesInline implements ResourceLink {
+    sys: ResourceSys!
+}
+
+type ContentProjectLinkingCollections {
+    entryCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): EntryCollection
 }
 
 type ContentfulMetadata {
@@ -323,9 +441,21 @@ type ElementTextTextLinks {
 }
 
 type ElementTextTextResources {
-    block: [ResourceLink!]!
-    hyperlink: [ResourceLink!]!
-    inline: [ResourceLink!]!
+    block: [ElementTextTextResourcesBlock!]!
+    hyperlink: [ElementTextTextResourcesHyperlink!]!
+    inline: [ElementTextTextResourcesInline!]!
+}
+
+type ElementTextTextResourcesBlock implements ResourceLink {
+    sys: ResourceSys!
+}
+
+type ElementTextTextResourcesHyperlink implements ResourceLink {
+    sys: ResourceSys!
+}
+
+type ElementTextTextResourcesInline implements ResourceLink {
+    sys: ResourceSys!
 }
 
 type EntryCollection {
@@ -440,6 +570,7 @@ type MetaMusicGenreLinkingCollections {
 
 "[See type definition](https://app.contentful.com/spaces/52n4e3ya8eqj/content_types/pageGeneric)"
 type PageGeneric implements Entry {
+    backgroundColor(locale: String): String
     contentfulMetadata: ContentfulMetadata!
     internalName(locale: String): String
     linkedFrom(allowedLocales: [String]): PageGenericLinkingCollections
@@ -471,6 +602,7 @@ type PageGenericSectionsCollection {
 }
 
 type Query {
+    _node(id: ID!, locale: String, preview: Boolean): _Node
     asset(id: String!, locale: String, preview: Boolean): Asset
     assetCollection(limit: Int = 100, locale: String, order: [AssetOrder], preview: Boolean, skip: Int = 0, where: AssetFilter): AssetCollection
     contentBrand(id: String!, locale: String, preview: Boolean): ContentBrand
@@ -479,6 +611,8 @@ type Query {
     contentMagazineIssueCollection(limit: Int = 100, locale: String, order: [ContentMagazineIssueOrder], preview: Boolean, skip: Int = 0, where: ContentMagazineIssueFilter): ContentMagazineIssueCollection
     contentMusicReview(id: String!, locale: String, preview: Boolean): ContentMusicReview
     contentMusicReviewCollection(limit: Int = 100, locale: String, order: [ContentMusicReviewOrder], preview: Boolean, skip: Int = 0, where: ContentMusicReviewFilter): ContentMusicReviewCollection
+    contentProject(id: String!, locale: String, preview: Boolean): ContentProject
+    contentProjectCollection(limit: Int = 100, locale: String, order: [ContentProjectOrder], preview: Boolean, skip: Int = 0, where: ContentProjectFilter): ContentProjectCollection
     elementImage(id: String!, locale: String, preview: Boolean): ElementImage
     elementImageCollection(limit: Int = 100, locale: String, order: [ElementImageOrder], preview: Boolean, skip: Int = 0, where: ElementImageFilter): ElementImageCollection
     elementTechnical(id: String!, locale: String, preview: Boolean): ElementTechnical
@@ -500,13 +634,8 @@ type Query {
     uiNavigationCollection(limit: Int = 100, locale: String, order: [UiNavigationOrder], preview: Boolean, skip: Int = 0, where: UiNavigationFilter): UiNavigationCollection
 }
 
-type ResourceLink {
-    sys: ResourceSys!
-}
-
 type ResourceSys {
     linkType: String!
-    type: String!
     urn: String!
 }
 
@@ -514,6 +643,8 @@ type Sys {
     environmentId: String!
     firstPublishedAt: DateTime
     id: String!
+    "The locale that was requested."
+    locale: String
     publishedAt: DateTime
     publishedVersion: Int
     spaceId: String!
@@ -546,66 +677,6 @@ type UiNavigationNavigationItemsCollection {
     total: Int!
 }
 
-enum AssetLinkingCollectionsContentBrandCollectionOrder {
-    internalName_ASC
-    internalName_DESC
-    slug_ASC
-    slug_DESC
-    sys_firstPublishedAt_ASC
-    sys_firstPublishedAt_DESC
-    sys_id_ASC
-    sys_id_DESC
-    sys_publishedAt_ASC
-    sys_publishedAt_DESC
-    sys_publishedVersion_ASC
-    sys_publishedVersion_DESC
-    title_ASC
-    title_DESC
-}
-
-enum AssetLinkingCollectionsContentMagazineIssueCollectionOrder {
-    internalName_ASC
-    internalName_DESC
-    issueNumber_ASC
-    issueNumber_DESC
-    sys_firstPublishedAt_ASC
-    sys_firstPublishedAt_DESC
-    sys_id_ASC
-    sys_id_DESC
-    sys_publishedAt_ASC
-    sys_publishedAt_DESC
-    sys_publishedVersion_ASC
-    sys_publishedVersion_DESC
-}
-
-enum AssetLinkingCollectionsElementImageCollectionOrder {
-    internalName_ASC
-    internalName_DESC
-    sys_firstPublishedAt_ASC
-    sys_firstPublishedAt_DESC
-    sys_id_ASC
-    sys_id_DESC
-    sys_publishedAt_ASC
-    sys_publishedAt_DESC
-    sys_publishedVersion_ASC
-    sys_publishedVersion_DESC
-}
-
-enum AssetLinkingCollectionsMediaFileCollectionOrder {
-    internalName_ASC
-    internalName_DESC
-    sys_firstPublishedAt_ASC
-    sys_firstPublishedAt_DESC
-    sys_id_ASC
-    sys_id_DESC
-    sys_publishedAt_ASC
-    sys_publishedAt_DESC
-    sys_publishedVersion_ASC
-    sys_publishedVersion_DESC
-    title_ASC
-    title_DESC
-}
-
 enum AssetOrder {
     contentType_ASC
     contentType_DESC
@@ -629,6 +700,21 @@ enum AssetOrder {
     width_DESC
 }
 
+enum ContentBrandLinkingCollectionsContentProjectCollectionOrder {
+    internalName_ASC
+    internalName_DESC
+    name_ASC
+    name_DESC
+    sys_firstPublishedAt_ASC
+    sys_firstPublishedAt_DESC
+    sys_id_ASC
+    sys_id_DESC
+    sys_publishedAt_ASC
+    sys_publishedAt_DESC
+    sys_publishedVersion_ASC
+    sys_publishedVersion_DESC
+}
+
 enum ContentBrandLinkingCollectionsUiNavigationCollectionOrder {
     internalName_ASC
     internalName_DESC
@@ -643,6 +729,8 @@ enum ContentBrandLinkingCollectionsUiNavigationCollectionOrder {
 }
 
 enum ContentBrandOrder {
+    backgroundColor_ASC
+    backgroundColor_DESC
     internalName_ASC
     internalName_DESC
     slug_ASC
@@ -725,7 +813,43 @@ enum ContentMusicReviewOrder {
     title_DESC
 }
 
+enum ContentProjectBrandCollectionOrder {
+    backgroundColor_ASC
+    backgroundColor_DESC
+    internalName_ASC
+    internalName_DESC
+    slug_ASC
+    slug_DESC
+    sys_firstPublishedAt_ASC
+    sys_firstPublishedAt_DESC
+    sys_id_ASC
+    sys_id_DESC
+    sys_publishedAt_ASC
+    sys_publishedAt_DESC
+    sys_publishedVersion_ASC
+    sys_publishedVersion_DESC
+    title_ASC
+    title_DESC
+}
+
+enum ContentProjectOrder {
+    internalName_ASC
+    internalName_DESC
+    name_ASC
+    name_DESC
+    sys_firstPublishedAt_ASC
+    sys_firstPublishedAt_DESC
+    sys_id_ASC
+    sys_id_DESC
+    sys_publishedAt_ASC
+    sys_publishedAt_DESC
+    sys_publishedVersion_ASC
+    sys_publishedVersion_DESC
+}
+
 enum ElementImageLinkingCollectionsContentBrandCollectionOrder {
+    backgroundColor_ASC
+    backgroundColor_DESC
     internalName_ASC
     internalName_DESC
     slug_ASC
@@ -756,6 +880,8 @@ enum ElementImageOrder {
 }
 
 enum ElementTechnicalLinkingCollectionsContentBrandCollectionOrder {
+    backgroundColor_ASC
+    backgroundColor_DESC
     internalName_ASC
     internalName_DESC
     slug_ASC
@@ -786,6 +912,8 @@ enum ElementTechnicalOrder {
 }
 
 enum ElementTextLinkingCollectionsContentBrandCollectionOrder {
+    backgroundColor_ASC
+    backgroundColor_DESC
     internalName_ASC
     internalName_DESC
     slug_ASC
@@ -895,6 +1023,8 @@ enum ImageResizeStrategy {
 }
 
 enum LayoutGridLinkingCollectionsContentBrandCollectionOrder {
+    backgroundColor_ASC
+    backgroundColor_DESC
     internalName_ASC
     internalName_DESC
     slug_ASC
@@ -1061,6 +1191,8 @@ enum MetaMusicGenreOrder {
 }
 
 enum PageGenericLinkingCollectionsPageGenericCollectionOrder {
+    backgroundColor_ASC
+    backgroundColor_DESC
     internalName_ASC
     internalName_DESC
     slug_ASC
@@ -1091,6 +1223,8 @@ enum PageGenericLinkingCollectionsUiNavigationCollectionOrder {
 }
 
 enum PageGenericOrder {
+    backgroundColor_ASC
+    backgroundColor_DESC
     internalName_ASC
     internalName_DESC
     slug_ASC
@@ -1213,6 +1347,13 @@ input AssetFilter {
 input ContentBrandFilter {
     AND: [ContentBrandFilter]
     OR: [ContentBrandFilter]
+    backgroundColor: String
+    backgroundColor_contains: String
+    backgroundColor_exists: Boolean
+    backgroundColor_in: [String]
+    backgroundColor_not: String
+    backgroundColor_not_contains: String
+    backgroundColor_not_in: [String]
     cardImage_exists: Boolean
     contentfulMetadata: ContentfulMetadataFilter
     description_contains: String
@@ -1339,6 +1480,34 @@ input ContentMusicReviewFilter {
     title_not: String
     title_not_contains: String
     title_not_in: [String]
+}
+
+input ContentProjectFilter {
+    AND: [ContentProjectFilter]
+    OR: [ContentProjectFilter]
+    brand: cfContentBrandNestedFilter
+    brandCollection_exists: Boolean
+    contentfulMetadata: ContentfulMetadataFilter
+    description_contains: String
+    description_exists: Boolean
+    description_not_contains: String
+    internalName: String
+    internalName_contains: String
+    internalName_exists: Boolean
+    internalName_in: [String]
+    internalName_not: String
+    internalName_not_contains: String
+    internalName_not_in: [String]
+    logo_exists: Boolean
+    name: String
+    name_contains: String
+    name_exists: Boolean
+    name_in: [String]
+    name_not: String
+    name_not_contains: String
+    name_not_in: [String]
+    sys: SysFilter
+    teaserImage_exists: Boolean
 }
 
 input ContentfulMetadataFilter {
@@ -1539,6 +1708,13 @@ input MetaMusicGenreFilter {
 input PageGenericFilter {
     AND: [PageGenericFilter]
     OR: [PageGenericFilter]
+    backgroundColor: String
+    backgroundColor_contains: String
+    backgroundColor_exists: Boolean
+    backgroundColor_in: [String]
+    backgroundColor_not: String
+    backgroundColor_not_contains: String
+    backgroundColor_not_in: [String]
     contentfulMetadata: ContentfulMetadataFilter
     internalName: String
     internalName_contains: String
@@ -1623,6 +1799,13 @@ input UiNavigationFilter {
 input UiNavigationNavigationItemsFilter {
     AND: [UiNavigationNavigationItemsFilter]
     OR: [UiNavigationNavigationItemsFilter]
+    backgroundColor: String
+    backgroundColor_contains: String
+    backgroundColor_exists: Boolean
+    backgroundColor_in: [String]
+    backgroundColor_not: String
+    backgroundColor_not_contains: String
+    backgroundColor_not_in: [String]
     contentfulMetadata: ContentfulMetadataFilter
     internalName: String
     internalName_contains: String
@@ -1631,6 +1814,47 @@ input UiNavigationNavigationItemsFilter {
     internalName_not: String
     internalName_not_contains: String
     internalName_not_in: [String]
+    slug: String
+    slug_contains: String
+    slug_exists: Boolean
+    slug_in: [String]
+    slug_not: String
+    slug_not_contains: String
+    slug_not_in: [String]
+    sys: SysFilter
+    title: String
+    title_contains: String
+    title_exists: Boolean
+    title_in: [String]
+    title_not: String
+    title_not_contains: String
+    title_not_in: [String]
+}
+
+input cfContentBrandNestedFilter {
+    AND: [cfContentBrandNestedFilter]
+    OR: [cfContentBrandNestedFilter]
+    backgroundColor: String
+    backgroundColor_contains: String
+    backgroundColor_exists: Boolean
+    backgroundColor_in: [String]
+    backgroundColor_not: String
+    backgroundColor_not_contains: String
+    backgroundColor_not_in: [String]
+    cardImage_exists: Boolean
+    contentfulMetadata: ContentfulMetadataFilter
+    description_contains: String
+    description_exists: Boolean
+    description_not_contains: String
+    internalName: String
+    internalName_contains: String
+    internalName_exists: Boolean
+    internalName_in: [String]
+    internalName_not: String
+    internalName_not_contains: String
+    internalName_not_in: [String]
+    logo_exists: Boolean
+    sectionsCollection_exists: Boolean
     slug: String
     slug_contains: String
     slug_exists: Boolean
@@ -1716,6 +1940,13 @@ input cfMetaMusicGenreNestedFilter {
 input cfPageGenericNestedFilter {
     AND: [cfPageGenericNestedFilter]
     OR: [cfPageGenericNestedFilter]
+    backgroundColor: String
+    backgroundColor_contains: String
+    backgroundColor_exists: Boolean
+    backgroundColor_in: [String]
+    backgroundColor_not: String
+    backgroundColor_not_contains: String
+    backgroundColor_not_in: [String]
     contentfulMetadata: ContentfulMetadataFilter
     internalName: String
     internalName_contains: String
@@ -1746,6 +1977,13 @@ input cfPageGenericNestedFilter {
 input cfnavigationItemsMultiTypeNestedFilter {
     AND: [cfnavigationItemsMultiTypeNestedFilter]
     OR: [cfnavigationItemsMultiTypeNestedFilter]
+    backgroundColor: String
+    backgroundColor_contains: String
+    backgroundColor_exists: Boolean
+    backgroundColor_in: [String]
+    backgroundColor_not: String
+    backgroundColor_not_contains: String
+    backgroundColor_not_in: [String]
     contentfulMetadata: ContentfulMetadataFilter
     internalName: String
     internalName_contains: String

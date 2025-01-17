@@ -1,19 +1,35 @@
 <template>
-  <BaseContainer class="mb-12">
-    <BaseHeadline text="The Brands" type="h2" />
-  </BaseContainer>
-  <BaseContainer
-    class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8"
-  >
-    <NuxtLink
-      v-for="(brand, index) in brands.contentBrandCollection.items"
-      :key="index"
-      :to="`/brand/${brand.sys.id}`"
-      class="card relative self-start rounded-3xl shadow-xl"
-    >
-      <img :src="brand?.cardImage?.url" alt="" />
-    </NuxtLink>
-  </BaseContainer>
+  <section>
+    <BaseContainer class="mb-10 text-center">
+      <BaseHeadline text="The Brands" type="h1" />
+    </BaseContainer>
+    <BaseContainer class="row-1 flex justify-center">
+      <NuxtLink
+        v-for="(brand, index) in brands.contentBrandCollection?.items?.slice(
+          0,
+          2,
+        )"
+        :key="index"
+        :to="`/brand/${brand.sys.id}`"
+        class="brand-card relative self-start w-1/3"
+      >
+        <img :src="brand?.cardImage?.url" alt="" />
+      </NuxtLink>
+    </BaseContainer>
+    <BaseContainer class="row-2 flex">
+      <NuxtLink
+        v-for="(brand, index) in brands.contentBrandCollection?.items?.slice(
+          2,
+          5,
+        )"
+        :key="index"
+        :to="`/brand/${brand.sys.id}`"
+        class="brand-card relative w-full"
+      >
+        <img :src="brand?.cardImage?.url" alt="" />
+      </NuxtLink>
+    </BaseContainer>
+  </section>
 </template>
 
 <script setup>
@@ -24,16 +40,25 @@ const { data: brands } = await useAsyncGql({
 })
 </script>
 
-<style>
-.card:after {
-  border-radius: 50px;
-  content: '';
-  position: absolute;
-  background-color: black;
-  top: 8px;
-  left: -10px;
-  right: 10px;
-  bottom: -8px;
-  z-index: -1;
+<style scoped>
+.row-1 .brand-card:nth-of-type(1) {
+  rotate: 10deg;
+}
+.row-1 .brand-card:nth-of-type(2) {
+  rotate: -8deg;
+}
+
+.row-2 .brand-card:nth-of-type(1) {
+  rotate: -8deg;
+}
+
+.row-2 .brand-card:nth-of-type(2) {
+  rotate: 5deg;
+  transform: translateY(-30px);
+}
+
+.row-2 .brand-card:nth-of-type(3) {
+  rotate: 15deg;
+  transform: translateY(-100px);
 }
 </style>

@@ -5,6 +5,7 @@
       :resource="data.resource"
       :api-key="data.apiKey"
       :max-results="data.maxResults"
+      :layout="data.layout"
     />
   </div>
 </template>
@@ -20,6 +21,7 @@ type Props = {
     id: string
     apiKey: string
     maxResults: number
+    layout: string
   }
 }
 
