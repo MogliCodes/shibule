@@ -1,19 +1,33 @@
 <template>
-  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-20">
+  <div class="flex flex-col gap-40">
     <div v-for="video in data?.items">
       <client-only>
-        <component
-          is="script"
-          id="youtube-iframe-js-api-script"
-          src="https://www.youtube.com/iframe_api"
-        />
-        <iframe
-          class="w-full aspect-video mb-8 rounded-xl"
-          :src="iframeSrc(video.id.videoId)"
-        />
-        <p class="mb-2">{{ formatDate(video.snippet.publishedAt) }}</p>
-        <BaseHeadline class="mb-4" type="h3" :text="video.snippet.title" />
-        <p>{{ video.snippet.description }}</p>
+        <div
+          :class="{
+            'grid grid-cols-2 gap-10': props.layout === 'thumbnail-description',
+          }"
+        >
+          <div>
+            <component
+              is="script"
+              id="youtube-iframe-js-api-script"
+              src="https://www.youtube.com/iframe_api"
+            />
+            <iframe
+              class="w-full aspect-video rounded-xl"
+              :src="iframeSrc(video.id.videoId)"
+            />
+          </div>
+          <div>
+            <p class="mb-2">{{ formatDate(video.snippet.publishedAt) }}</p>
+            <BaseHeadline
+              class="!text-4xl mb-4"
+              type="h3"
+              :text="video.snippet.title"
+            />
+            <p class="text-xl">{{ video.snippet.description }}</p>
+          </div>
+        </div>
       </client-only>
     </div>
   </div>
@@ -25,6 +39,7 @@ type Props = {
   id: string
   apiKey: string
   maxResults: number
+  layout: string
 }
 
 const props = defineProps<Props>()
@@ -49,9 +64,6 @@ function formatDate(_date) {
     year: 'numeric',
     month: '2-digit',
     day: '2-digit',
-    hour: '2-digit',
-    minute: '2-digit',
-    timeZoneName: 'short',
   }
 
   const germanDateFormat = new Intl.DateTimeFormat('de-DE', options)

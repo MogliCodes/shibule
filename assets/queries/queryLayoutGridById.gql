@@ -80,6 +80,12 @@ query queryLayoutGridById ($id: String!) {
                         url
                     }
                 }
+                ... on ContentBrand {
+                    title
+                    description {
+                        json
+                    }
+                }
             }
         }
     }

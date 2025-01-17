@@ -1,13 +1,15 @@
 <template>
   <div class="flex flex-col gap-40">
-    <section class="h-screen">
-      <div id="lottie-container" class="h-screen"></div>
-    </section>
+    <BaseContainer style="padding: 200px 0">
+      <p class="hugh-mungous font-serif font-bold text-center">
+        Shibulé ist der Beat, den Jay-Z nicht wollte.
+      </p>
+    </BaseContainer>
     <BrandsList />
     <!--    <ContentRecent />-->
-    <BaseContainer>
-      <BaseHeadline class="mb-10" text="New Stuff" type="h2" />
-      <div class="grid grid-cols-3 gap-20">
+    <BaseContainer class="pb-20">
+      <BaseHeadline class="mb-10" text="New Stuff" type="h1" />
+      <div class="grid grid-cols-2 gap-20">
         <div class="relative rounded-xl" v-for="video in data?.items">
           <client-only>
             <component
@@ -15,16 +17,20 @@
               id="youtube-iframe-js-api-script"
               src="https://www.youtube.com/iframe_api"
             />
-            <div class="rounded-2xl overflow-hidden aspect-video">
+            <div class="rounded-2xl overflow-hidden aspect-video mb-6">
               <iframe
                 class="relative z-10 w-full aspect-video mb-8"
                 :src="iframeSrc(video.id.videoId)"
               />
-              <BaseSkeleton class="absolute top-0 z-0 aspect-video mb-8" />
+              <BaseSkeleton
+                class="hidden absolute top-0 z-0 aspect-video mb-8"
+              />
             </div>
-            <p class="mb-2">{{ formatDate(video.snippet.publishedAt) }}</p>
+            <p class="mb-2 text-sm">
+              {{ formatDate(video.snippet.publishedAt) }}
+            </p>
             <BaseHeadline class="mb-4" type="h3" :text="video.snippet.title" />
-            <p>{{ video.snippet.description }}</p>
+            <!--            <p>{{ video.snippet.description }}</p>-->
           </client-only>
         </div>
       </div>
@@ -65,12 +71,16 @@ function formatDate(_date) {
     year: 'numeric',
     month: '2-digit',
     day: '2-digit',
-    hour: '2-digit',
-    minute: '2-digit',
-    timeZoneName: 'short',
   }
 
   const germanDateFormat = new Intl.DateTimeFormat('de-DE', options)
   return germanDateFormat.format(date)
 }
 </script>
+
+<style>
+.hugh-mungous {
+  font-size: 10rem;
+  line-height: 1;
+}
+</style>

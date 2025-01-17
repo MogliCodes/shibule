@@ -1,16 +1,30 @@
 <template>
   <section>
-    <BaseContainer class="mb-10">
-      <BaseHeadline text="The Brands" type="h2" />
+    <BaseContainer class="mb-10 text-center">
+      <BaseHeadline text="The Brands" type="h1" />
     </BaseContainer>
-    <BaseContainer
-      class="grid content-center sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8"
-    >
+    <BaseContainer class="row-1 flex justify-center">
       <NuxtLink
-        v-for="(brand, index) in brands.contentBrandCollection?.items"
+        v-for="(brand, index) in brands.contentBrandCollection?.items?.slice(
+          0,
+          2,
+        )"
         :key="index"
         :to="`/brand/${brand.sys.id}`"
-        class="relative self-start"
+        class="brand-card relative self-start w-1/3"
+      >
+        <img :src="brand?.cardImage?.url" alt="" />
+      </NuxtLink>
+    </BaseContainer>
+    <BaseContainer class="row-2 flex">
+      <NuxtLink
+        v-for="(brand, index) in brands.contentBrandCollection?.items?.slice(
+          2,
+          5,
+        )"
+        :key="index"
+        :to="`/brand/${brand.sys.id}`"
+        class="brand-card relative w-full"
       >
         <img :src="brand?.cardImage?.url" alt="" />
       </NuxtLink>
@@ -25,3 +39,26 @@ const { data: brands } = await useAsyncGql({
   operation: 'queryBrands',
 })
 </script>
+
+<style scoped>
+.row-1 .brand-card:nth-of-type(1) {
+  rotate: 10deg;
+}
+.row-1 .brand-card:nth-of-type(2) {
+  rotate: -8deg;
+}
+
+.row-2 .brand-card:nth-of-type(1) {
+  rotate: -8deg;
+}
+
+.row-2 .brand-card:nth-of-type(2) {
+  rotate: 5deg;
+  transform: translateY(-30px);
+}
+
+.row-2 .brand-card:nth-of-type(3) {
+  rotate: 15deg;
+  transform: translateY(-100px);
+}
+</style>

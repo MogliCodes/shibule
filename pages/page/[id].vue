@@ -1,8 +1,10 @@
 <template>
-  <div class="flex flex-col gap-8">
-    <BaseContainer>
-      <BaseHeadline :text="page?.pageGeneric.title" type="h1" />
-    </BaseContainer>
+  <div class="py-40 flex flex-col gap-8">
+    <section class="">
+      <BaseContainer>
+        <BaseHeadline :text="page?.pageGeneric.title" type="h1" />
+      </BaseContainer>
+    </section>
     <BaseContainer>
       <p v-if="pending">Data loading is pending</p>
     </BaseContainer>

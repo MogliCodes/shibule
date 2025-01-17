@@ -4,6 +4,7 @@
     :id="props.id"
     :api-key="props.apiKey"
     :max-results="props.maxResults"
+    :layout="props.layout"
   />
   <MediaYoutubePlaylist
     v-if="props.resource === 'playlist'"
@@ -19,6 +20,7 @@ type Props = {
   id: string
   apiKey: string
   maxResults: number
+  layout: string
 }
 const props = defineProps<Props>()
 </script>

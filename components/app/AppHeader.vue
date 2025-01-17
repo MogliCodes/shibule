@@ -1,17 +1,17 @@
 <template>
-  <header class="py-10 pl-10">
+  <header class="fixed z-50 w-full py-10 pl-10">
     <NuxtLink :to="`/`">
-      <img class="w-20" src="/shibule_logo_white.svg" alt="" />
+      <img class="w-20 relative z-20" src="/shibule_logo_white.svg" alt="" />
     </NuxtLink>
     <div
       class="absolute right-10 top-10 flex h-20 w-20 items-center justify-center rounded-full bg-gray-50"
     >
       <div
         v-show="isNavActive"
-        class="absolute right-0 top-0 z-10 h-20 w-20 rounded-full bg-gray-50 transition-transform duration-500"
+        class="absolute right-0 top-0 z-80 h-20 w-20 rounded-full bg-gray-300 transition-transform duration-500"
       >
         <nav
-          class="fixed inset-0 flex flex-col items-center justify-center bg-gray-50"
+          class="fixed z-70 inset-0 flex flex-col items-center justify-center bg-gray-950 text-yellow-400 bg-opacity-80 backdrop-blur-md m-20 rounded-xl"
         >
           <div
             v-for="(item, index) in navigationItems"
@@ -24,7 +24,7 @@
               @click="toggleNavigation"
             >
               <span
-                class="font-serif text-3xl md:text-5xl font-bold hover:text-pink-500"
+                class="font-serif text-3xl md:text-8xl font-bold hover:text-yellow-50"
                 >{{ item.title || item.internalName }}</span
               >
             </NuxtLink>
@@ -32,7 +32,7 @@
         </nav>
       </div>
       <button
-        class="relative z-20 flex h-full w-full items-center justify-center"
+        class="relative z-80 flex h-full w-full items-center justify-center"
         @click="toggleNavigation"
       >
         <svg
